@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
+    "debbug": "nodemon --inspect index.js",
     "lint": "./node_modules/.bin/eslint"
   },
   "keywords": [],
