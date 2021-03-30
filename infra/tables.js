@@ -11,7 +11,7 @@ class Tables {
   createAttendance() {
     const sql = `
       CREATE TABLE IF NOT EXISTS Attendance (id int NOT NULL AUTO_INCREMENT,
-      client varchar(50) NOT NULL,
+      client varchar(11) NOT NULL,
       pet varchar(20),
       service varchar(20) NOT NULL,
       creationDate datetime NOT NULL,

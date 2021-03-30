@@ -1,3 +1,4 @@
+const { default: axios } = require('axios')
 const moment = require('moment')
 const conection = require('../infra/conection')
 
@@ -53,8 +54,19 @@ class Attendance {
   searchById(id, res) {
     const sql = `SELECT * FROM attendance WHERE id=${id}`
 
-    conection.query(sql, (err, result) => {
-      err ? res.status(400).json(err) : res.status(200).json(result[0])
+    conection.query(sql, async (err, result) => {
+      const selectedAttendance = result[0]
+      const cpf = selectedAttendance.client
+
+      if (err) {
+        res.status(400).json(err)
+      } else {
+        const { data } = await axios.get(`http://localhost:8082/${cpf}`)
+
+        selectedAttendance.client = data
+
+        res.status(200).json(selectedAttendance)
+      }
     })
   }
 
